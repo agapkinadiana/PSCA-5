@@ -1,0 +1,17 @@
+{
+  "server": {
+    "host": "localhost",
+    "port": 3000
+  },
+  "db": {
+    "driver": "msnodesqlv8",
+    "connectionString": "Driver={SQL Server Native Client 11.0};Server={DIANA\\SQLEXPRESS};Database={ADS};Trusted_Connection={yes};"
+  },
+  "objects": {
+    "faculties": "Faculty",
+    "pulpits": "Pulpit",
+    "subjects": "Subject",
+    "auditorium_types": "Auditorium_Type",
+    "auditoriums": "Auditorium"
+  }
+}

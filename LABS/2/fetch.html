@@ -1,0 +1,26 @@
+<html>
+   <head>
+        <meta charset="UTF-8">
+        <title>Fetch</title>
+    </head>
+    <body onload="init()">
+        <h2>Fetch</h2>
+        <div id="full-name"></div>
+    
+        <script>
+            function init() {
+                let settings = {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'text/plain',
+                    }
+                };
+        
+                fetch('http://localhost:5000/api/name', settings) 
+                .then(async response => {
+                    document.getElementById('full-name').innerHTML = await response.text();
+                });
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Films</title>
+</head>
+<body onload="getFilms()">
+ 
+<button onclick="getFilms()">Refresh</button>
+<hr/>
+<br/>
+<section id="select-films"></section>
+<hr/>
+ 
+<section id="insert-films">
+    <div>
+        <label>
+            <input name="newFilmData" id="id" type="number" placeholder="Id">
+        </label>
+        <label>
+            <input name="newFilmData" id="title" type="text" placeholder="Title">
+        </label>
+        <label>
+            <input name="newFilmData" id="producer" type="text" placeholder="Producer">
+        </label>
+        <label>
+            <input name="newFilmData" id="genre" type="text" placeholder="Genre">
+        </label>
+        <label>
+            <input name="newFilmData" id="production" type="text" placeholder="Production">
+        </label>
+        <label>
+            <input name="newFilmData" id="duration" type="number" placeholder="Duration">
+        </label>
+        <label>
+            <input name="newFilmData" id="year_of_issue" type="number" placeholder="Year_of_issue">
+        </label>
+    </div>
+    <button onclick="submit()">Submit</button>
+</section>
+ 
+<script>
+    const ENDPOINT = 'http://localhost:5000/api/db';
+ 
+    function getFilms() {
+        fetch(ENDPOINT, {method: 'GET'})
+            .then(response => response.json())
+            .then(jsonResponse => {
+                let container = document.getElementById('select-films');
+                container.innerHTML = '';
+                jsonResponse.forEach(film => {
+                    let filmContainer = document.createElement('div');
+ 
+                    let deleteButton = document.createElement('button');
+                    deleteButton.setAttribute('onclick', 'deleteFilm(event)');
+                    deleteButton.setAttribute('filmId', film.id);
+                    deleteButton.innerText = 'Delete';
+ 
+                    filmContainer.innerHTML = `<span>${film.id}. ${film.title}: Producer - ${film.producer}, Genre - ${film.genre}, Production - ${film.production}, Duration - ${film.duration}, Year_of_issue - ${film.year_of_issue}</span>`;
+                    filmContainer.appendChild(deleteButton);
+ 
+                    container.append(filmContainer, document.createElement('br'));
+                });
+            });
+    }
+ 
+    function submit() {
+        let filmData = Array.from(document.getElementsByName('newFilmData')).map(a => {
+            return {field: a.getAttribute('id'), value: a.value};
+        });
+        let filmId = filmData.find(a => a.field === 'id').value;
+        upsert(filmData, filmId);
+    }
+ 
+    function upsert(filmData, filmId) {
+        fetch(ENDPOINT, {
+            method: filmData ? 'PUT' : 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id: Number(filmId),
+                title: filmData.find(a => a.field === 'title').value,
+                producer: filmData.find(a => a.field === 'producer').value,
+                genre: filmData.find(a => a.field === 'genre').value,
+                production:filmData.find(a => a.field === 'production').value,
+                duration: Number(filmData.find(a => a.field === 'duration').value),
+                year_of_issue: Number(filmData.find(a => a.field === 'year_of_issue').value),
+            })
+        }).then(() => getFilms());
+    }
+ 
+    function deleteFilm(event) {
+        if (confirm('Are you sure you want to remove this record?')) {
+            fetch(ENDPOINT + '?id=' + event.target.getAttribute('filmId'), {method: 'DELETE'})
+                .then(() => getFilms());
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "title": "Green book",
+    "producer": "Peter Farrelly",
+    "genre": "Comedy drama",
+    "production": "Canada",
+    "duration": 130,
+    "year_of_issue": 2018
+  },
+  {
+    "id": 2,
+    "title": "The Shawshank Redemption",
+    "producer": "Frank Darabont",
+    "genre": "Drama",
+    "production": "USA",
+    "duration": 142,
+    "year_of_issue": 1994
+  },
+  {
+    "id": 3,
+    "title": "1+1",
+    "producer": "Olivier Nakache",
+    "genre": "Drama",
+    "production": "France",
+    "duration": 112,
+    "year_of_issue": 2011
+  }
+]

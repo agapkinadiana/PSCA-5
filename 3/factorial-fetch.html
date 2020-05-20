@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Summary</title>
+    </head>
+    <body onload="init()">
+        <div id='result'></div>
+        <div id='result1'></div>
+        <script>
+            function init(){
+                result.innerHTML = '';
+                let n = 1;
+                const d = Date.now();
+                var time = 0;
+                var m = 0;
+
+                for (let k=1; k<= 20; k++) {
+                    fetch (`http://localhost:5000/fact?k=${k}`)
+                        .then(response => response.json())
+                        .then((data) => {
+                            time=(Date.now()-d);
+                            m+=time;
+                            result.innerHTML += (n++) + '. Результат: ' + time + '-' + data.k + '/' + data.fact + '<br/>'; 
+                            result1.innerHTML += m+ '<br/>';
+                        }
+                    )
+                }
+                //result1.innerHTML += m+ '<br/>';
+            }
+        </script>
+    </body>
+</html>

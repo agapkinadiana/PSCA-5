@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Factorial</title>
+</head>
+
+<body>
+    <div id='result'>
+        <script>
+            result.innerHTML = '';
+            let n = 0;
+            const d = Date.now();
+            for(var k = 1 ; k <= 20; ++k) {
+                fetch(`/fact?k=${k}`)
+                .then(response => response.json())
+                .then(data => {result.innerHTML += (Date.now() - d) + ' - ' + data.k + '/' + data.fact + '<br>'});
+            }
+        </script>
+    </div>
+</body>
+
+</html>

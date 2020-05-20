@@ -1,0 +1,28 @@
+<html>
+   <head>
+        <meta charset="UTF-8">
+        <title>jquery</title>
+    </head>
+    <body>
+        <h2>JQuery</h2>
+        <div id="full-name"></div>
+    
+        <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script>
+            function init() {
+                $(document).ready(function() {
+                    let settings = {
+                        type: 'GET',
+                        async: true,
+                        url: 'http://localhost:5000/api/name'
+                    };
+
+                    $.ajax(settings).done(response => {
+                        $('#full-name').text(response);
+                    }).then(function() {})
+                });
+            }
+            setTimeout(init,1000);
+        </script>
+    </body>
+</html>

@@ -1,0 +1,9 @@
+{
+  "name": "lab14",
+  "version": "1.0.0",
+  "dependencies": {
+    "graphql": "^14.5.8",
+    "msnodesqlv8": "^0.8.4",
+    "mssql": "^5.1.0"
+  }
+}

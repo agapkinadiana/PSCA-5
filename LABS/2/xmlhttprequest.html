@@ -1,0 +1,28 @@
+<html>
+   <head>
+        <meta charset="UTF-8">
+        <title>XmlHttpRequest</title>
+    </head>
+    <body onload="init()">
+        <h2>XmlHttpRequest</h2>
+        <div id="full-name"></div>
+    
+        <script>
+            function init() {
+                let request = new XMLHttpRequest();
+                request.open('GET', 'http://localhost:5000/api/name', true);
+                request.onreadystatechange = () => {
+                    if (request.readyState === 4) {
+                        if (request.status === 200) {
+                            console.log('OK. ' + request.responseText);
+                            document.getElementById('full-name').innerHTML = request.responseText;
+                        } else {
+                            console.log('nope.\n' + request.statusCode);
+                        }
+                    }
+                };
+                request.send();
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,10 @@
+{
+  "db": {
+    "driver": "msnodesqlv8",
+    "connectionString": "Driver={SQL Server Native Client 11.0};Server={DIANAAGAPKI0D5D\\\\SQLEXPRESS};Database={lab14node};Trusted_Connection={yes};"
+  },
+  "http": {
+    "port": 3000,
+    "host": "localhost"
+  }
+}

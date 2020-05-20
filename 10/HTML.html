@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="JS.js"></script>
+</head>
+    <body>
+        <h1>Hello</h1>
+        <button onclick="startWS()">start WS</button>
+        <button onclick="startBroadcastWS()">connect broadcast WS</button>
+        <h1>Received:</h1>
+        <div id="response-container"></div>
+        <br><br>
+        <h1>Sent:</h1>
+        <div id="request-container"></div>
+
+        <script>
+            let messageInterval;
+            let requestCount = 1;
+
+            function startWS() {
+                const socket = new WebSocket('ws:/localhost:4000');
+
+                socket.onmessage = message => {
+                    let newMessage = document.createElement('div');
+                    newMessage.innerText = message.data;
+                    document.getElementById('response-container').appendChild(newMessage);
+                };
+
+                messageInterval = setInterval(() => {
+                    let message = JSON.stringify({client: requestCount++});
+                    socket.send(message);
+
+                    let newMessage = document.createElement('div');
+                    newMessage.innerText = message;
+                    document.getElementById('request-container').appendChild(newMessage);
+                }, 3000);
+
+                setTimeout(() => {
+                    clearInterval(messageInterval);
+                    socket.close();
+                }, 25000);
+            }
+
+            function startBroadcastWS() {
+                const socket = new WebSocket('ws:/localhost:5000');
+                socket.onmessage = message => {
+                    console.log('Broadcast message: ' + message.data);
+                    socket.close();
+                };
+                socket.onopen = () => {
+                    socket.send('Client connected');
+                };
+            }
+        </script>
+    </body>
+</html>

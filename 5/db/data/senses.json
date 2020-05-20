@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "cinema name": "Moskow",
+        "hall name": "A",
+        "movie title": "Green book",
+        "date": "09/09/2019",
+        "time": "15:10",
+        "ticket price": 10
+    },
+    {
+        "id": 2,
+        "cinema name": "Central",
+        "hall name": "C",
+        "movie title": "The Shawshank Redemption",
+        "date": "09/10/2019",
+        "time": "17:40",
+        "ticket price": 8
+    },
+    {
+        "id": 3,
+        "cinema name": "Silver Screen",
+        "hall name": "B",
+        "movie title": "1+1",
+        "date": "01/10/2019",
+        "time": "09:30",
+        "ticket price": 15
+    },
+    {
+        "id": 4,
+        "cinema name": "Aurora",
+        "hall name": "E",
+        "movie title": "The Shawshank Redemption",
+        "date": "05/09/2019",
+        "time": "14:30",
+        "ticket price": 9
+    }
+]

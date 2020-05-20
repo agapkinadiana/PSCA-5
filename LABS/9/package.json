@@ -1,0 +1,10 @@
+{
+  "name": "9",
+  "version": "1.0.0",
+  "dependencies": {
+    "xmlbuilder": "^13.0.2"
+  },
+  "devDependencies": {
+    "xml2js": "^0.4.23"
+  }
+}

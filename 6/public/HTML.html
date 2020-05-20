@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="eng">
+    <head>
+        <meta charset="UTF-8">
+        <title>Email Sender</title>
+    </head>
+    <body>
+        <div>
+            <h2>New Email</h2>
+            <div>
+                <label title="From">
+                    <input id="from" type="email" placeholder="example@mail.com">
+                </label>
+            </div>
+            <div>
+                <label title="To">
+                    <input id="to" type="email" placeholder="example@mail.com">
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input id="message" type="text" placeholder="New message">
+                </label>
+            </div>
+            <div>
+                <button onclick="sendMail()">Send</button>
+            </div>
+        </div>
+        <script>
+                function sendMail() {
+                    fetch('http://localhost:8000/mail', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            from: document.getElementById('from').value,
+                            to: document.getElementById('to').value,
+                            message: document.getElementById('message').value
+                        })
+                    }).then(() => alert('Message Sent'));
+                }
+            </script>
+    </body>
+</html>

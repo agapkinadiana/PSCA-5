@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>4 lab</title>
+    </head>
+    <body>
+    <div style= "padding: 10px;" id="get_result"></div>
+    <button onclick="Get()">Show All</button>
+    <br>
+    <div style="padding: 10px">
+        <br/>
+        <div>
+            <label>ID</label>
+            <input type="number" id ="Id" min="0"/>
+        </div>
+        <br/>
+        <div>
+            <label>Name</label>
+            <input type="text" id ="Name"/>
+        </div>
+        <br/>
+        <div>
+            <label>Birth Day</label>
+            <input type="date" id ="BDay"/>
+        </div>
+        <br/>
+        <div> <button onclick="Post()">Add new user</button> </div>
+        <div> <button onclick="Delete()">Delete by ID</button> </div>
+        <div> <button onclick="Put()">Change by ID</button> </div>
+        </div>
+
+
+        <script>
+            Get();  
+            function Post(){
+                fetch("http://localhost:3000/api/db",{
+                    method: "POST",
+                    mode: "no-cors",
+                    headers: {"Content-Type": "application/json", "Accept": "application/json"},
+                    body: JSON.stringify({
+                        id : Id.value, 
+                        name: Name.value, 
+                        bday: BDay.value})
+                })
+                .then (response => {return response.json();});
+            }
+
+            function Get(){
+                fetch("http://localhost:3000/api/db",{
+                    method: "GET", 
+                    mode:"no-cors",
+                    headers: {"Content-Type": "application/json", "Accept": "application/json"}
+                })
+                .then(response => { return response.json();})
+                .then((pdata)=>{
+                    get_result.innerHTML = "";
+                    pdata.forEach(element => { 
+                        get_result.innerHTML += (element.id + ". " + element.name+ " - " + element.bday + "<br/>");
+                    });
+                })
+            }
+
+            function Delete(){
+                fetch("http://localhost:3000/api/db",{
+                    method: "DELETE",
+                    headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify({
+                        id : Id.value, 
+                        name: Name.value, 
+                        bday: BDay.value})
+                })
+                .then (response => response.json())
+            }
+
+            function Put(){
+                fetch("http://localhost:3000/api/db",{
+                    method: "PUT",
+                    headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify({
+                        id : Id.value, 
+                        name: Name.value, 
+                        bday: BDay.value})
+                })
+                .then (response => response.json())
+            }
+
+        </script>
+    </body>
+</html>

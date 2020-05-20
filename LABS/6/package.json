@@ -1,0 +1,7 @@
+{
+  "name": "Lab6",
+  "version": "1.0.0",
+  "dependencies": {
+    "sendmail": "latest"
+  }
+}

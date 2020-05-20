@@ -1,0 +1,14 @@
+{
+  "server": {
+    "host": "localhost",
+    "port": 3000
+  },
+  "db": {
+    "_comment": "Here you should specify your db username and password",
+    "connectionString": "mongodb+srv://Diana:DeWWsh123@bstucluster-x0qcu.mongodb.net/test?retryWrites=true&w=majority"
+  },
+  "object_mapping": {
+    "faculties": "Faculty",
+    "pulpits": "Pulpit"
+  }
+}
